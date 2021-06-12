@@ -1,15 +1,9 @@
 # Write a Ruby program that given an integer number, rearranges its digits to create the largest number possible with those digits. If a non-integer number is entered, it should reprompt the person again for a number until a number is entered.
+number = 0
 
-print "Enter a number: "
-number = gets.chomp
-
-while true
-    if number.to_i.to_s == number
-        break
-    else
-        print "Enter an actual number: "
-        number = gets.chomp
-    end
+until number.to_i.to_s == number
+  print "Enter a number: "
+  number = gets.chomp
 end
 
 if number.to_i >= 0
