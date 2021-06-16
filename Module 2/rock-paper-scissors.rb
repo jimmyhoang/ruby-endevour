@@ -3,17 +3,23 @@ def play_game(player_one, player_two)
     return "Tie" if player_one == player_two
 
     if player_one == "rock" && player_two == "paper"
-        "Paper covers rock."
+        puts "Paper covers rock."
+        puts "Player 2 wins."
     elsif player_one == "rock" && player_two == "scissors"
-        "Rock crushes scissors"
+        puts "Rock crushes scissors"
+        puts "Player 1 wins."
     elsif player_one == "paper" && player_two == "scissors"
-        "Scissor cuts paper."
+        puts "Scissor cuts paper."
+        puts "Player 2 wins."
     elsif player_one == "paper" && player_two == "rock"
-        "Paper covers rock."
+        puts "Paper covers rock."
+        puts "Player 1 wins."
     elsif player_one == "scissors" && player_two == "paper"
-        "Scissors cuts paper."
+        puts "Scissors cuts paper."
+        puts "Player 1 wins."
     elsif player_one == "scissors" && player_two == "rock"
-        "Rock crushes scissors"
+        puts "Rock crushes scissors"
+        puts "Player 2 wins."
     end
 end
 
