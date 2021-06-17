@@ -1,39 +1,61 @@
 def play_game(player_one, player_two)
-
-    return "Tie" if player_one == player_two
-
     if player_one == "rock" && player_two == "paper"
-        "Paper covers rock."
+        yield("Paper covers rock.", "Player 2")
     elsif player_one == "rock" && player_two == "scissors"
-        "Rock crushes scissors"
+        yield("Rock crushes scissors", "Player 1")
     elsif player_one == "paper" && player_two == "scissors"
-        "Scissor cuts paper."
+        yield("Scissor cuts paper.", "Player 2")
     elsif player_one == "paper" && player_two == "rock"
-        "Paper covers rock."
+        yield("Paper covers rock.", "Player 1")
     elsif player_one == "scissors" && player_two == "paper"
-        "Scissors cuts paper."
+        yield("Scissors cuts paper.", "Player 1")
     elsif player_one == "scissors" && player_two == "rock"
-        "Rock crushes scissors"
+        yield("Rock crushes scissors", "Player 2")
+    elsif player_one == player_two
+        yield("Tie", nil)
     end
 end
-
 
 puts "Rock Paper Scissors"
 valid_answers = ["rock", "paper", "scissors"]
-cheat_message = "No cheaters! Only Rock, Paper, or Scissors are allowed."
+winner = false
+p1_wins = 0
+p2_wins = 0
 
-print "Player 1 - Enter your selection: "
-player_one = gets.chomp.downcase
+until winner
+    player_one = ""
+    player_two = ""
 
-print "Player 2 - Enter your selection: "
-player_two = gets.chomp.downcase
+    until (valid_answers.include? player_one) && (valid_answers.include? player_two)
+        print "Player 1 - Enter your selection: "
+        player_one = gets.chomp.downcase
+    
+        print "Player 2 - Enter your selection: "
+        player_two = gets.chomp.downcase
 
-if valid_answers.include? player_one
-    if valid_answers.include? player_two
-        puts play_game(player_one, player_two)
-    else
-        puts cheat_message
+        unless (valid_answers.include? player_one) && (valid_answers.include? player_two)
+            puts "No cheaters! Only Rock, Paper, or Scissors are allowed."
+        end
+
     end
-else
-    puts cheat_message
+
+    play_game(player_one, player_two) do | text, winner |
+        puts text
+        if winner == "Player 1"
+            p1_wins += 1
+        elsif winner == "Player 2"
+            p2_wins += 1
+        end
+    end
+
+    if p1_wins == 2
+        winner = true
+        puts "Player 1 wins!"
+    elsif p2_wins == 2
+        winner = true
+        puts "Player 2 wins!"
+    end
 end
+
+
+
