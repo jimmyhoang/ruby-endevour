@@ -1,26 +1,28 @@
 def play_game(player_one, player_two)
     if player_one == "rock" && player_two == "paper"
-        yield("Paper covers rock.", "Player 2", false)
+        yield("Paper covers rock.", "Player 2")
     elsif player_one == "rock" && player_two == "scissors"
-        yield("Rock crushes scissors", "Player 1", false)
+        yield("Rock crushes scissors", "Player 1")
     elsif player_one == "paper" && player_two == "scissors"
-        yield("Scissor cuts paper.", "Player 2", false)
+        yield("Scissor cuts paper.", "Player 2")
     elsif player_one == "paper" && player_two == "rock"
-        yield("Paper covers rock.", "Player 1", false)
+        yield("Paper covers rock.", "Player 1")
     elsif player_one == "scissors" && player_two == "paper"
-        yield("Scissors cuts paper.", "Player 1", false)
+        yield("Scissors cuts paper.", "Player 1")
     elsif player_one == "scissors" && player_two == "rock"
-        yield("Rock crushes scissors", "Player 2", false)
+        yield("Rock crushes scissors", "Player 2")
     elsif player_one == player_two
-        yield("Tie", nil, true)
+        yield("Tie", nil)
     end
 end
 
 puts "Rock Paper Scissors"
 valid_answers = ["rock", "paper", "scissors"]
-play_again = true
+winner = false
+p1_wins = 0
+p2_wins = 0
 
-while play_again
+until winner
     player_one = ""
     player_two = ""
 
@@ -37,10 +39,21 @@ while play_again
 
     end
 
-    play_game(player_one, player_two) do | text, winner, again |
+    play_game(player_one, player_two) do | text, winner |
         puts text
-        puts "#{winner} wins!" if winner
-        play_again = again
+        if winner == "Player 1"
+            p1_wins += 1
+        elsif winner == "Player 2"
+            p2_wins += 1
+        end
+    end
+
+    if p1_wins == 2
+        winner = true
+        puts "Player 1 wins!"
+    elsif p2_wins == 2
+        winner = true
+        puts "Player 2 wins!"
     end
 end
 
