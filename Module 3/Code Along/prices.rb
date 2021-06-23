@@ -1,6 +1,5 @@
 def total(prices)
     amount = 0
-    index = 0
     prices.each do |price|
         amount += price
     end
