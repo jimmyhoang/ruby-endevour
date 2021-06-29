@@ -5,3 +5,4 @@ File.open("reviews.txt") do |review_file|
 end
 
 relevant_lines = lines.find_all { |line| lines.include?("Truncated") }
+reviews = relevant_lines.reject { |line| lines.include?("--") }
