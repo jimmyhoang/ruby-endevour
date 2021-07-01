@@ -1,14 +1,16 @@
 def get_input
-    print "How much change is owed? $"
-    input = gets.to_f
-    input
-end
-
-def convert_to_cents(dollar)
-    dollar * 100
+    owed = 0
+    until owed.is_a?(Float) && owed.positive?
+        print "How much change is owed? $"
+        owed = gets.to_f
+    end
+    owed
 end
 
 def calculate_change(amount)
+    #convert to cents
+    amount *= 100
+    
     denominations = [200, 100, 25, 10, 5, 1]
     change = []
 
@@ -43,13 +45,5 @@ def output_change(change)
 end
 
 owed = get_input
-
-until owed.is_a?(Float) && owed.positive?
-    owed = get_input
-end
-
-owed = convert_to_cents(owed)
-
 change_amount = calculate_change(owed)
-
 output_change(change_amount)
