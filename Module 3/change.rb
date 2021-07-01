@@ -5,16 +5,21 @@ def get_input
 end
 
 def calculate_change(amount)
-    denominations = [200, 100, 25, 10, 5]
+    denominations = [200, 100, 25, 10, 5, 1]
     change = []
 
-    denominations.each do |denom| 
+    denominations.each { |denom| 
         while amount >= denom
             amount -= denom
             change << denom
         end
-    end
+    }
+
+    pennies = change.count(1)
+    change = change.reject! { |x| x == 1 }
+    change << 5 unless pennies < 3
     change
+
 end
 
 def convert_to_cents(dollar)
@@ -30,3 +35,4 @@ end
 owed = convert_to_cents(owed)
 
 change_amount = calculate_change(owed)
+puts change_amount
