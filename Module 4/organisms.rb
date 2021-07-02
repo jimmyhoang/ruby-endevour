@@ -71,10 +71,41 @@ class Kepler
     end
 
     def time_jump()
+        new_inhabitants = []
         @inhabitants.each do |org|
             result = rand(-100..100)
-            
+            new_count = @inhabitants.count(org) + result
+            new_count.times { new_inhabitants << org.dup}
         end
+        @inhabitants = new_inhabitants
+        show_inhabitants
+    end
+
+    def show_inhabitants
+        inhabitants_count = Hash.new(0)
+
+        @inhabitants.each do |org|
+            case org
+            when Blasttwozor
+                inhabitants_count["Blasttwozors"] += 1
+            when Vneuder
+                inhabitants_count["Vneuders"] += 1
+            when Chartoist 
+                inhabitants_count["Chartoists"] += 1
+            when Planktonist 
+                inhabitants_count["Planktonists"] += 1
+            when Charwomander 
+                inhabitants_count["Charwomanders"] += 1
+            end
+        end
+        
+        puts "Time jumping...these are the remaining organisms:"
+        if inhabitants_count.empty?
+            puts "All organisms are DEAD"
+        else
+            inhabitants_count.each { |x,y| puts "#{y} #{x}" }
+        end
+
     end
 end
 
@@ -108,3 +139,4 @@ organisms = [blastwozor, vneuder, chartoist, planktonist, charwomander]
 spaceship.board_ship(organisms)
 spaceship.blast_off
 kepler_1649c.board_planet(organisms)
+kepler_1649c.time_jump
