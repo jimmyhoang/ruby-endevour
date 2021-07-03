@@ -1,6 +1,6 @@
 module AcceptsComments
     def comments
-        @comments = || []
+        @comments ||= []
     end
 
     def add_comment(comment)
@@ -38,4 +38,7 @@ video.add_comment("Weird ending.")
 song = Song.new
 song.add_comment("Awesome beat.")
 
-p video.comments, song.comments
+photo = Photo.new
+photo.add_comment("Beautiful colours.")
+
+p video.comments, song.comments, photo.comments
